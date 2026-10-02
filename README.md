@@ -88,7 +88,7 @@ src/
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/cafeflow.git
+git clone https://github.com/JeevithaJesebelJ/Cafeflow
 ```
 
 Move into the project:
