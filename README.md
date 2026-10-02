@@ -1,32 +1,158 @@
-# React + TypeScript + Vite
+# CaféFlow ☕️
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+### Digital Café Operations Platform
 
-Currently, two official plugins are available:
+CaféFlow is an independently developed MVP designed to explore how cafés can streamline their everyday digital operations through a single platform.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The project combines **online ordering, table/workspace reservations, and staff operations** into one responsive web application.
 
-## React Compiler
+> **Project status:** Independent MVP / Portfolio Project
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+### Customer Experience
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+* Browse the café menu
+* Search and filter menu items
+* Add items to a shopping cart
+* Update cart quantities
+* Place orders
+* Reserve work-friendly seating
+* View booking information
+
+### Staff Operations
+
+* Staff dashboard
+* View incoming orders
+* Update order status
+* View and manage bookings
+* Confirm or cancel bookings
+* Add and manage staff members
+* Activate/deactivate staff members
+
+### Responsive Design
+
+* Desktop customer experience
+* Mobile-friendly customer experience
+* Responsive staff dashboard
+* Mobile staff navigation
+
+---
+
+## 🛠️ Tech Stack
+
+* **React**
+* **TypeScript**
+* **Vite**
+* **Tailwind CSS**
+* **React Router**
+* **Lucide React**
+* **LocalStorage**
+
+---
+
+## 🏗️ Project Structure
+
+```text
+src/
+├── components/
+│   ├── Navbar.tsx
+│   └── StaffNavbar.tsx
+│
+├── data/
+│   ├── bookingStorage.ts
+│   ├── cartStorage.ts
+│   ├── menu.ts
+│   ├── orderStorage.ts
+│   └── staffStorage.ts
+│
+├── pages/
+│   ├── Home.tsx
+│   ├── Menu.tsx
+│   ├── Booking.tsx
+│   ├── Cart.tsx
+│   ├── StaffDashboard.tsx
+│   ├── StaffOrders.tsx
+│   ├── StaffBookings.tsx
+│   └── StaffManagement.tsx
+│
+└── App.tsx
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+---
+
+## 🚀 Running Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/YOUR-USERNAME/cafeflow.git
+```
+
+Move into the project:
+
+```bash
+cd cafeflow
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The application will then be available through the local development URL provided by Vite.
+
+---
+
+## 💡 Why I Built This
+
+CaféFlow started from a simple observation:
+
+**Cafés are increasingly becoming spaces where people don't just eat and leave — they work, meet, study, and spend extended periods of time.**
+
+This MVP explores how digital tools could help cafés manage:
+
+* customer ordering
+* workspace seating
+* reservations
+* incoming orders
+* staff operations
+
+The goal was to build a practical product rather than simply a static café website.
+
+---
+
+## 🔮 Future Improvements
+
+Potential future versions could include:
+
+* Online payments
+* QR-based table ordering
+* Real-time order tracking
+* Real-time table availability
+* Customer accounts
+* Automated booking confirmations
+* Analytics dashboard
+* Cloud database
+* Authentication and role-based access
+* Multi-café support
+
+---
+
+## ⚠️ Disclaimer
+
+CaféFlow is an independently developed prototype created for portfolio and product exploration purposes.
+
+It is **not affiliated with, endorsed by, or officially associated with any café, business, or brand referenced during the project's design or development.**
+
+All trademarks and brand names belong to their respective owners.
+
