@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Check, Clock3, ChefHat, ShoppingBag } from "lucide-react";
 
@@ -9,11 +10,12 @@ import {
 function OrderStatus() {
   const [order, setOrder] = useState<Order | null>(null);
 
-  const loadLatestOrder = () => {
-    const orders = getOrders();
+  const loadLatestOrder = async () => {
+    const orders = await getOrders();
 
     if (orders.length > 0) {
-      setOrder(orders[orders.length - 1]);
+      // getOrders() returns newest orders first
+      setOrder(orders[0]);
     }
   };
 
@@ -59,7 +61,8 @@ function OrderStatus() {
     {
       status: "Preparing",
       title: "Preparing your order",
-      description: "The CaféFlow team is preparing your food and drinks.",
+      description:
+        "The CaféFlow team is preparing your food and drinks.",
     },
     {
       status: "Ready",
@@ -213,6 +216,7 @@ function OrderStatus() {
                 key={item.id}
                 className="flex items-center justify-between gap-4"
               >
+
                 <div>
                   <p className="font-medium">
                     {item.name}
@@ -226,6 +230,7 @@ function OrderStatus() {
                 <p className="font-medium text-[#53664D]">
                   ₹{item.price * item.quantity}
                 </p>
+
               </div>
             ))}
 

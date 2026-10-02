@@ -19,20 +19,27 @@ import {
 function StaffOrders() {
   const [orders, setOrders] = useState<Order[]>([]);
 
-  const loadOrders = () => {
-    setOrders(getOrders());
+  const loadOrders = async () => {
+    const fetchedOrders = await getOrders();
+    setOrders(fetchedOrders);
   };
 
   useEffect(() => {
     loadOrders();
+
+    const interval = setInterval(() => {
+      loadOrders();
+    }, 2000);
+
+    return () => clearInterval(interval);
   }, []);
 
-  const handleStatusChange = (
+  const handleStatusChange = async (
     orderId: string,
     status: Order["status"]
   ) => {
-    updateOrderStatus(orderId, status);
-    loadOrders();
+    await updateOrderStatus(orderId, status);
+    await loadOrders();
   };
 
   return (
@@ -203,7 +210,9 @@ function StaffOrders() {
                       <div className="text-sm text-[#817A6E]">
                         <p className="flex items-center gap-2">
                           <Clock3 size={15} />
-                          {order.createdAt}
+                          {new Date(
+                            order.createdAt
+                          ).toLocaleString()}
                         </p>
                       </div>
 
@@ -324,4 +333,5 @@ function StaffOrders() {
 }
 
 export default StaffOrders;
+
 

@@ -1,5 +1,5 @@
-
 import type { CartItem } from "./cartStorage";
+import { supabase } from "../lib/supabase";
 
 export type OrderStatus =
   | "Received"
@@ -17,46 +17,55 @@ export type Order = {
   createdAt: string;
 };
 
-const STORAGE_KEY = "CaféFlow_orders";
+export async function getOrders(): Promise<Order[]> {
+  const { data, error } = await supabase
+    .from("orders")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-export function getOrders(): Order[] {
-  try {
-    const storedOrders = localStorage.getItem(STORAGE_KEY);
-
-    if (!storedOrders) {
-      return [];
-    }
-
-    return JSON.parse(storedOrders) as Order[];
-  } catch {
+  if (error) {
+    console.error("Error fetching orders:", error);
     return [];
+  }
+
+  return (data ?? []).map((order) => ({
+    id: String(order.id),
+    name: order.name,
+    phone: order.phone,
+    items: order.items as CartItem[],
+    total: Number(order.total),
+    status: order.status as OrderStatus,
+    createdAt: order.created_at,
+  }));
+}
+
+export async function saveOrder(order: Order): Promise<void> {
+  const { error } = await supabase.from("orders").insert({
+    name: order.name,
+    phone: order.phone,
+    items: order.items,
+    total: order.total,
+    status: order.status,
+    created_at: order.createdAt,
+  });
+
+  if (error) {
+    console.error("Error saving order:", error);
+    throw error;
   }
 }
 
-export function saveOrder(order: Order): void {
-  const existingOrders = getOrders();
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify([...existingOrders, order])
-  );
-}
-
-export function updateOrderStatus(
+export async function updateOrderStatus(
   orderId: string,
   status: OrderStatus
-): void {
-  const orders = getOrders();
+): Promise<void> {
+  const { error } = await supabase
+    .from("orders")
+    .update({ status })
+    .eq("id", Number(orderId));
 
-  const updatedOrders = orders.map((order) =>
-    order.id === orderId
-      ? { ...order, status }
-      : order
-  );
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(updatedOrders)
-  );
+  if (error) {
+    console.error("Error updating order status:", error);
+    throw error;
+  }
 }
-
